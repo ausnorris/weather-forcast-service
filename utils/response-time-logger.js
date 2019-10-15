@@ -4,8 +4,9 @@ const registry = new metrics.Registry();
 const DEPLOYMENTID = process.env.DEPLOYMENT_ID || "vra.node.testing.new";
 const WAVEFRONT_TOKEN = process.env.WAVEFRONT_TOKEN
 const prefix = DEPLOYMENTID +".nodejs.forecast";
+const hostId = process.env.HOST_ID
 
-const directReporter = new metrics.WavefrontDirectReporter(registry, prefix,  "surf.wavefront.com", WAVEFRONT_TOKEN, { 'app': "vra.app.weather", 'source': DEPLOYMENTID+"-forecast"});
+const directReporter = new metrics.WavefrontDirectReporter(registry, prefix,  "surf.wavefront.com", WAVEFRONT_TOKEN, { 'app': "vra.app.weather", 'source': hostId +"-" +DEPLOYMENTID+"-forecast"});
 directReporter.start(5000);
 const c = new metrics.Counter();
 registry.addTaggedMetric("request.time", c, {"vra.service":"forecast"});
