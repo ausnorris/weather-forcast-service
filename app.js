@@ -4,7 +4,9 @@ const forecast = require('./utils/forecast')
 const app = express();
 const logResponseTime = require("./utils/response-time-logger");
 const PORT = process.env.WEATHER_FORECAST_LB_SERVICE_PORT || 3002
+var cors = require('cors');
 
+app.use(cors());
 //const latitude = process.env.LATITUDE
 //const longitude = process.env.LONGITUDE
 //const location = process.env.LOCATION
